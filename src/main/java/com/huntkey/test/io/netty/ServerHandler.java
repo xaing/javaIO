@@ -13,6 +13,7 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         ByteBuf in = (ByteBuf) msg;
         byte[] req = new byte[in.readableBytes()];
+        in.readBytes(req);
         String body = new String(req, "utf-8");
         System.out.println(" get client msg : " + body);
         ctx.write(Unpooled.copiedBuffer("server return msg ".getBytes()));
